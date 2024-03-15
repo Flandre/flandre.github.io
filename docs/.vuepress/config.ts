@@ -10,10 +10,13 @@ export default defineUserConfig({
   head: [['link', { rel: 'icon', href: '/images/avatar.jpg' }]],
 
   theme: defaultTheme({
-    logo: 'https://vuejs.press/images/hero.png',
+    logo: '/images/avatar.jpg',
 
     navbar: [
-      '/',
+      {
+        text: 'Home',
+        link: '/',
+      },
       {
         text: 'Article',
         link: '/article/',
