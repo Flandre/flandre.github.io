@@ -4,10 +4,10 @@ import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
-  lang: 'en-US',
-
-  title: 'VuePress',
-  description: 'My first VuePress Site',
+  lang: 'zh-CN',
+  title: 'Flandre 的博客',
+  description: '这个人什么都懒得写.jpg',
+  head: [['link', { rel: 'icon', href: '/images/avatar.jpg' }]],
 
   theme: defaultTheme({
     logo: 'https://vuejs.press/images/hero.png',
@@ -32,6 +32,8 @@ export default defineUserConfig({
       },
     ],
   }),
+
+  pagePatterns: ['**/*.md', '!**/README.md', '!.vuepress', '!node_modules'],
 
   plugins: [
     blogPlugin({
