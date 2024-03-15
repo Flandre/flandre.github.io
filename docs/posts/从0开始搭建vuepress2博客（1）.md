@@ -45,7 +45,7 @@ docs/.vuepress/.cache
 docs/.vuepress/dist
 ```
 
-如果你的 git 默认的 branch 不是 main，比如我就默认用的 master，你需要将.github/workflow/deploy-docs.yml 中的 branches 改为 master
+如果你的 git 默认的 branch 不是 `main`，比如我就默认用的 `master`，你需要将.github/workflow/deploy-docs.yml 中的 branches 改为 master
 
 ### 初始化项目
 
@@ -63,3 +63,26 @@ git push -u origin master
 ```
 
 这时，你 github 的项目会自动运行 action，等待片刻后，在项目的 settings 中找到 page 选项卡，将 branch 改为 gh-pages 分支，此时，xxx.github.io 就是你的博客网站啦。
+
+### 更换首页及主题图
+
+> 自动创建的 `/docs/.vuepress/config.js` 与 `/docs/.vuepress/client.js` 为 `js` 文件，为了方便后续开发，我们将它改为 `ts` 文件
+
+`vuepress` 默认的首页是 `README.md`，这会让 github 的 readme 显示首页的内容，我们可以创建个 index.md 做首页。但是，当 `index.md` 和 `README.md` 都存在时，`vuepress` 会将两个文件都编译，所以我们需要在 `/docs/.vuepress/config.ts` 中添加以下配置
+
+```js
+export default defineUserConfig({
+  ...
+    
+  # 增加 favicon
+  head: [['link', { rel: 'icon', href: '/images/avatar.jpg' }]],
+    
+  # 忽略 README.md 编译
+  pagePatterns: ['**/*.md', '!**/README.md', '!.vuepress', '!node_modules'],
+  
+  ...
+})
+```
+
+* 其中，资源会读取 `/docs/.vuepress/public/` 下的文件
+
